@@ -5,6 +5,16 @@ from settings import Settings
 from paper import Paper
 from scissors import Scissors
 
+def check_collision(rock,paper,scissors,mouse_x,mouse_y):
+    if rock.rect.collidepoint(mouse_x,mouse_y):
+        print("Rock")
+    elif paper.rect.collidepoint(mouse_x,mouse_y):
+        print("Paper")
+    elif scissors.rect.collidepoint(mouse_x,mouse_y):
+        print("Scissors")
+    else:
+        print("Nothing")
+        
 def run_game():
     pygame.init()
     settings = Settings()
@@ -28,7 +38,9 @@ def run_game():
                     sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
-                
+                print(mouse_x)
+                print(mouse_y)
+                check_collision(rock,paper,scissors,mouse_x,mouse_y)
         rock.blitme()
         paper.blitme()
         scissors.blitme()
