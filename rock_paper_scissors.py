@@ -1,4 +1,5 @@
 import pygame
+import sys
 from rock import Rock
 from settings import Settings
 
@@ -9,7 +10,13 @@ def run_game():
     pygame.display.set_caption("Rock Paper Scissors")
     screen.fill(settings.bg_color)
     rock = Rock(settings, screen)
-    rock.blitme()
-    pygame.display.flip()
+
+    while True:
+        # check events here
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+        rock.blitme()
+        pygame.display.flip()
     
 run_game()
