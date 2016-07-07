@@ -6,6 +6,15 @@ from paper import Paper
 from scissors import Scissors
 import random
 
+def check_results():
+    bot_answer = random.randrange(1,4)
+    if bot_answer == 1:
+        print("Scissors")
+    elif bot_answer == 2:
+        print("Rock")
+    else:
+        print("Paper")
+              
 def check_collision(rock,paper,scissors,mouse_x,mouse_y,settings):
     """Method for detecting mouse click"""
     # If clicked on rock
@@ -13,12 +22,12 @@ def check_collision(rock,paper,scissors,mouse_x,mouse_y,settings):
         settings.game_screen = False
     # If clicked on paper
     elif paper.rect.collidepoint(mouse_x,mouse_y):
-        print("Paper")
+        check_results()
     # If clicked on scissors
     elif scissors.rect.collidepoint(mouse_x,mouse_y):
         print("Scissors")
     else:
-        print(random.randrange(1,4))
+        print("Nothing")
 
 def game_screen(myfont,screen,rock,scissors,paper,settings):
     label = myfont.render("Choose either rock, paper or scissors", 1, (0,0,0))
@@ -36,6 +45,19 @@ def game_screen(myfont,screen,rock,scissors,paper,settings):
     rock.blitme()
     paper.blitme()
     scissors.blitme()
+
+def result_screen(myfont,screen):
+    resultlabel = myfont.render("YOU WIN!", 1, (0,0,0))
+    screen.blit(resultlabel, (250, 100))
+    # check events here
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
+                sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
         
 def run_game():
     pygame.init()
@@ -53,6 +75,7 @@ def run_game():
             game_screen(myfont,screen,rock,scissors,paper,settings)
         else:
             screen.fill(settings.bg_color)
+            result_screen(myfont,screen)
         pygame.display.flip()
     
 run_game()
