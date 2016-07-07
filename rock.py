@@ -7,6 +7,7 @@ class Rock(Sprite):
         super(Rock, self).__init__()
         self.screen = screen
         self.settings = settings
+        self.value = 1
         self.image = pygame.image.load('images/rock.bmp')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()

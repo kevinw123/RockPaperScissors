@@ -6,25 +6,55 @@ from paper import Paper
 from scissors import Scissors
 import random
 
-def check_results():
+def check_results(our_answer):
     bot_answer = random.randrange(1,4)
-    if bot_answer == 1:
-        print("Scissors")
-    elif bot_answer == 2:
-        print("Rock")
+    #Rock
+    if our_answer == 1:
+        print("Bot: Rock")
+        if bot_answer == 1:
+            print("Draw")
+        elif bot_answer == 2:
+            print("Lose")
+        else:
+            print("Win")
+    #Paper
+    elif our_answer == 2:
+        print("Bot: Paper")
+        if bot_answer == 1:
+            print("Win")
+        elif bot_answer == 2:
+            print("DRaw")
+        else:
+            print("Lose")
+    #Scissors
     else:
-        print("Paper")
+        print("Bot: Scissors")
+        if bot_answer == 1:
+            print("Lose")
+        elif bot_answer == 2:
+            print("Win")
+        else:
+            print("Draw")
               
 def check_collision(rock,paper,scissors,mouse_x,mouse_y,settings):
     """Method for detecting mouse click"""
     # If clicked on rock
     if rock.rect.collidepoint(mouse_x,mouse_y):
-        settings.game_screen = False
+        #settings.game_screen = False
+        our_answer = rock.value
+        check_results(our_answer)
+        print("Rock")
     # If clicked on paper
     elif paper.rect.collidepoint(mouse_x,mouse_y):
-        check_results()
+        #settings.game_screen = False
+        our_answer = paper.value
+        check_results(our_answer)
+        print("Paper")
     # If clicked on scissors
     elif scissors.rect.collidepoint(mouse_x,mouse_y):
+        #settings.game_screen = False
+        our_answer = scissors.value
+        check_results(our_answer)
         print("Scissors")
     else:
         print("Nothing")

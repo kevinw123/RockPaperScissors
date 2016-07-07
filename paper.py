@@ -7,6 +7,7 @@ class Paper(Sprite):
         super(Paper, self).__init__()
         self.screen = screen
         self.settings = settings
+        self.value = 2
         self.image = pygame.image.load('images/paper.bmp')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
